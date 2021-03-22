@@ -1,0 +1,14 @@
+{
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 5432,
+      "driver": "PostgreSQL",
+      "name": "Node-project",
+      "database": "adoption_center",
+      "username": "postgres",
+      "password": "password"
+    }
+  ]
+}
