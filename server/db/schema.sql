@@ -51,4 +51,3 @@ application_status VARCHAR(255) NOT NULL,
 home_status VARCHAR(255) NOT NULL,
 pet_id INTEGER REFERENCES adoptable_pets(id)
 );
-
