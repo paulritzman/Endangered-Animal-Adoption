@@ -3,9 +3,21 @@ import path from "path"
 import LineReader from "line-reader"
 import { fileURLToPath } from "url"
 
-const pool = new pg.Pool({
-  connectionString: "postgres://postgres:password@localhost:5432/adoption_center"
-})
+import query from "../functions/query.js"
+import { result } from "lodash"
+
+//setup __dirname to work with ESM
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+
+// file location
+const petTypes = path.join(__dirname, "../../pet_type.txt")
+const continents = path.join(__dirname, "../../continents.text")
+const petGroups = path.join(__dirname, "../../pet_groups.txt")
+const adoptablePets = path.join(__dirname, "../../adoptable_pets.txt")
+const petSurrenderApplications = path.join(__dirname, "../../pet_surrender_applications.txt")
+const adoptionApplications = path.join(__dirname, "../../adoption_applications.txt")
+
 
 class Seeder {
   static async seed() {
@@ -16,114 +28,59 @@ class Seeder {
     await seedAdoptablePets()
     await seedAdoptionApplications()
   }
+  
 
   async seedPetTypes() {
-    const petTypes = [
-      { id: 1, type: "Type1", description: "Type1 Description" },
-      { id: 2, type: "Type2", description: "Type2 Description" },
-      { id: 3, type: "Type3", description: "Type3 Description" },
-      { id: 4, type: "Type4", description: "Type4 Description" }
-    ]
+    LineReader.eachLine(petTypes, async(line, last, done) => {
+      const [type, description] = line.split(";")
+      const petTypeString = "INSERT INTO pet_types (type, description) VALUES ($1, $2)"
+      await query({ queryString: petTypeString, values: [type, description] })
+      done()
+    })
   }
 
   async seedContinents() {
-    const continents = [
-      { id: 1, name: "Continent1" },
-      { id: 2, name: "Continent2" },
-      { id: 3, name: "Continent3" },
-      { id: 4, name: "Continent4" },
-      { id: 5, name: "Continent5" },
-      { id: 6, name: "Continent6" },
-      { id: 7, name: "Continent7" }
-    ]
+    LineReader.eachLine(continents, async(line, last, done) => {
+      const [name] = line.split(";")
+      const continentString = "INSERT INTO continents (name) VALUES ($1)"
+      await query({ queryString: continentString, values: [name] })
+      done()
+    })
   }
 
   async seedPetGroups() {
-    const petGroups = [
-      { id: 1, groupTitle: "Reptile", continentId: 1, petTypeId: 1 },
-      { id: 2, groupTitle: "Marsupial", continentId: 2, petTypeId: 2 },
-      { id: 3, groupTitle: "Mammal", continentId: 1, petTypeId: 3 },
-      { id: 4, groupTitle: "Bird", continentId: 3, petTypeId: 4 }
-    ]
+    LineReader.eachLine(petGroups, async(line, last, done) => {
+      const [group_title, continent_id, pet_type_id] = line.split(";")
+      const petGroupString = "INSERT INTO pet_groups (group_title) VALUES ($1)"
+      await query ({ queryString: petGroupString, values: [group_title, continent_id, pet_type_id] })
+      done()
+    })
   }
 
   async seedPetSurrenderApplications() {
-    const petSurrenderApps = [
-      {
-        id: 1,
-        name: "person1",
-        phoneNumber: "555-555-5555",
-        email: "foo@bar.com",
-        petName: "Pet1",
-        petAge: 15,
-        petImageUrl: "http://www.somewhere.com/1.jpg",
-        vaccinationStatus: true,
-        applicationStatus: "Pending",
-        petTypeId: 4
-      },
-      {
-        id: 2,
-        name: "person2",
-        phoneNumber: "555-555-6666",
-        email: "foo2@bar.com",
-        petName: "Pet2",
-        petAge: 11,
-        petImageUrl: "http://www.somewhere.com/23.jpg",
-        vaccinationStatus: false,
-        applicationStatus: "Rejected",
-        petTypeId: 3
-      }
-    ]
+    LineReader.eachLine(petSurrenderApplications, async(line, last, done) => {
+      const [name, phone_number, email, pet_name, pet_age, pet_image_url, vaccination_status, application_status, pet_type_id] = line.split(";")
+      const petSurrenderedString = "INSERT INTO pet_surrender_applications (name, phone_number, email, pet_name, pet_age, pet_image_url, vaccination_status, application_status) VALUES ($1, $2, $3, $4, $5, $5, $6, $7, $8)"
+      await query ({ queryString: petSurrenderedString, values: [name, phone_number, email, pet_name, pet_age, pet_image_url, vaccination_status, application_status, pet_type_id] })
+      done()
+    })
   }
 
   async seedAdoptablePets() {
-    const adoptablePets = [
-      {
-        id: 1,
-        name: "animal1",
-        imageUrl: "http://www.somewhere.com/23.jpg",
-        age: 22,
-        vaccinationStatus: true,
-        adoptionStory:
-          "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequuntur laudantium veniam tenetur!",
-        adoptionStatus: "available",
-        petTypeId: 2
-      },
-      {
-        id: 2,
-        name: "animal2",
-        imageUrl: "http://www.somewhere.com/3.jpg",
-        age: 2,
-        vaccinationStatus: true,
-        adoptionStory:
-          "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequuntur laudantium veniam tenetur!",
-        adoptionStatus: "available",
-        petTypeId: 4
-      }
-    ]
+    LineReader.eachLine(adoptablePets, async(line, last, done) => {
+      const [name, image_url, age, vaccination_status, adoption_story, adoption_status] = line.split(";")
+      const adoptablePetString = "INSERT INTO adoptable_pets (name, image_url, age, vaccination_status, adoption_story, adoption_status) VALUES ($1, $2, $3, $4, $5, $6)"
+      await query ({ queryString: adoptablePetString, values: [name, image_url, age, vaccination_status, adoption_story, adoption_status] })
+      done()
+    })
   }
 
   async seedAdoptionApplications() {
-    const adoptionApps = [
-      {
-        id: 1,
-        name: "person1",
-        phoneNumber: "555-555-5555",
-        email: "foo2@bar.com",
-        applicationStatus: "Pending",
-        homeStatus: "Owns",
-        petId: 3
-      },
-      {
-        id: 2,
-        name: "person2",
-        phoneNumber: "555-555-6666",
-        email: "foo@bar.com",
-        applicationStatus: "Rejected",
-        homeStatus: "Rents",
-        petId: 2
-      }
-    ]
+    LineReader.eachLine(adoptionApplications, async(line, last, done) => {
+      const [name, phone_number, email, application_status, home_status] = line.split(";")
+      const adoptionApplicationString = "INSERT INTO adoption_applications (name, phone_number, email, application_status, home_status) VALUES ($1, $2, $3, $4, $5)"
+      await query ({ queryString: adoptionApplicationString, values: [name, phone_number, email, application_status, home_status] })
+    })
   }
 }
 
