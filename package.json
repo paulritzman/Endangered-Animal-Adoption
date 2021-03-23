@@ -3,17 +3,15 @@
   "version": "1.0.0",
   "description": "",
   "main": "webpack.config.js",
-  "type": "module",
   "scripts": {
-    "dev": "./node_modules/.bin/nodemon server/server.js",
-    "dev:debug": "./node_modules/.bin/nodemon --inspect-brk server/server.js",
+    "dev": "./node_modules/.bin/nodemon server/app.js",
+    "dev:debug": "./node_modules/.bin/nodemon --inspect-brk server/app.js",
     "dev:client": "node_modules/.bin/webpack-dev-server --host 0.0.0.0",
     "webpack": "node_modules/.bin/webpack --config ./webpack.config.js",
     "test": "./node_modules/.bin/jest",
     "db:import": "psql adoption_center < server/db/schema.sql",
     "db:seed": "node ./server/bin/seed.js"
   },
-
   "devDependencies": {
     "@babel/core": "^7.11.1",
     "@babel/preset-env": "^7.11.0",
