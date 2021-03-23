@@ -1,0 +1,9 @@
+mammal; 3; 1
+mammal; 3; 2
+mammal; 3; 3
+mammal; 1; 4
+mammal; 1; 5
+mammal; 6; 6
+reptile; 7; 7
+bird; 2; 8
+mammal; 5; 9
