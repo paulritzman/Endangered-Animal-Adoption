@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const AnimalSurrenderForm = (props) => {
-  const [petSurrenderRecord, setPetSurrenderRecord] = useState({
+  const [addPetSurrenderedRecord, setPetSurrenderRecord] = useState({
     name: "",
     phoneNumber: "",
     email: "",
@@ -22,7 +22,7 @@ const AnimalSurrenderForm = (props) => {
         headers: new Headers({
           "Content-Type": "application/json",
         }),
-        body: JSON.stringify(petSurrenderRecord)
+        body: JSON.stringify(addPetSurrenderedRecord)
       })
       if (!response.ok) {
         if (response.status === 422) {
@@ -35,7 +35,7 @@ const AnimalSurrenderForm = (props) => {
         }
       } else {
         const body = await response.json()
-        console.log("Posted successfully!", body)
+        console.log("Your request is in processs!", body)
         setRedirect(true)
       }
     } catch (error) {
@@ -54,26 +54,39 @@ const AnimalSurrenderForm = (props) => {
     }
 
     setPetSurrenderRecord({
-      ...petSurrenderRecord,
+      ...addPetSurrenderedRecord,
       [event.currentTarget.name]: value
     })
   }
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    if(addSurrenderedPet)
+    if({...petSurrenderedRecord} !== "") {
+      setErrors("")
+      props.petSurrenderedRecord(addPetSurrenderedRecord)
+      setPetSurrenderRecord({
+        ...petSurrenderedRecord
+      })
+    } else if ({...petSurrenderedRecord} !== "") {
+      setErrors("Field is blank. Please enter valid entry")
+    }
     addSurrenderedPet()
+  }
+
+  let errorMessage
+  if (errors) {
+    errorMessage = <h2>{errors}</h2>
   }
 
   const clearForm = (event) => {
     event.preventDefault()
     setErrors("")
     setPetSurrenderRecord({
-      ...petSurrenderRecord
+      ...petSurrenderedRecord
     })
   }
 
-  if (shouldRedirect) {
+  if (redirect) {
     return <Redirect to="/adoption" />
   }
 
@@ -86,7 +99,7 @@ const AnimalSurrenderForm = (props) => {
         type="text"
         name="name"
         onChange={handleChange}
-        value={petSurrenderRecord.name}
+        value={petSurrenderedRecord.name}
         />
       </label>
       <br />
@@ -99,7 +112,7 @@ const AnimalSurrenderForm = (props) => {
       placeholder="206-000-0000"
       pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
       onChange={handleChange}
-      value={petSurrenderRecord.phoneNumber}
+      value={petSurrenderedRecord.phoneNumber}
       />
       </label>
       <br />
@@ -110,7 +123,7 @@ const AnimalSurrenderForm = (props) => {
         type="email"
         name="email"
         onChange={handleChange}
-        value={petSurrenderRecord.email}
+        value={petSurrenderedRecord.email}
         />
       </label>
       <br />
@@ -121,7 +134,7 @@ const AnimalSurrenderForm = (props) => {
         type="text"
         name="petName"
         onChange={handleChange}
-        value={petSurrenderRecord.petName}
+        value={petSurrenderedRecord.petName}
         />
       </label>
       <br />
@@ -132,7 +145,7 @@ const AnimalSurrenderForm = (props) => {
         type="text"
         name="petAge"
         onChange={handleChange}
-        value={petSurrenderRecord.petAge}
+        value={petSurrenderedRecord.petAge}
         />
       </label>
       <br />
@@ -152,7 +165,7 @@ const AnimalSurrenderForm = (props) => {
         type="text"
         name="petImage"
         onChange={handleChange}
-        value={petSurrenderRecord.petImage}
+        value={petSurrenderedRecord.petImage}
         />
       </label>
       <br />
@@ -163,10 +176,12 @@ const AnimalSurrenderForm = (props) => {
         type="checkbox"
         name="vaccinationStatus"
         onChange={handleChange}
-        value={petSurrenderRecord.vaccinationStatus}
+        value={petSurrenderedRecord.vaccinationStatus}
         />
       </label>
       <br />
+
+      {errorMessage}
 
       <input type="submit" value="Surrender My Pet"/>
       <button className="button" onClick={clearForm}>Clear</button>
