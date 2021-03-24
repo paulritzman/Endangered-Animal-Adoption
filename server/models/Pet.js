@@ -1,4 +1,3 @@
-import { static } from "express";
 import query from "../functions/query.js";
 
 class Pet {
@@ -13,17 +12,18 @@ class Pet {
     this.pet_type_id = pet_type_id || petTypeId
   }
 
-  static async findAllPets() {
+  static async findAll() {
     const queryData = { queryString: "SELECT * FROM adoptable_pets;" };
     const petData = await query(queryData);
     return petData.map((pet) => new this(pet));
   }
 
-  static async findPetById(id){
+  static async findById(id){
     const queryData = { queryString: "SELECT * FROM adoptable_pets WHERE id = $1;", values: [id] };
     const petData = await query(queryData);
     return new this(petData[0]);
   }
+  
   // async savePet() {
   //   const insertString =
   //    "INSERT INTO adoptable_pets (name, image_url, age, vaccination_status, adoption_story, adoption_status,pet_type_id ) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id;";
@@ -36,4 +36,3 @@ class Pet {
 }
 
 export default Pet
-
