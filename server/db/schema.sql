@@ -51,3 +51,9 @@ application_status VARCHAR(255) NOT NULL,
 home_status VARCHAR(255) NOT NULL,
 pet_id INTEGER REFERENCES adoptable_pets(id)
 );
+
+ALTER TABLE pet_groups DROP CONSTRAINT pet_groups_pet_type_id_fkey;
+ALTER TABLE pet_groups DROP CONSTRAINT pet_groups_continent_id_fkey;
+ALTER TABLE pet_surrender_applications DROP CONSTRAINT pet_surrender_applications_pet_type_id_fkey;
+ALTER TABLE adoptable_pets DROP CONSTRAINT adoptable_pets_pet_type_id_fkey;
+ALTER TABLE adoption_applications DROP CONSTRAINT adoption_applications_pet_id_fkey;
