@@ -87,7 +87,7 @@ const AnimalSurrenderForm = (props) => {
   }
 
   if (redirect) {
-    return <Redirect to="/adoption" />
+    return <Redirect to="/adoption/new" />
   }
 
   return (
