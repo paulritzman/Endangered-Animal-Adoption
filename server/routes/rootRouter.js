@@ -9,6 +9,10 @@ rootRouter.use("/api/v1/pets", petsRouter)
 
 rootRouter.use("/api/v1/adoptions", adoptionsRouter)
 
+rootRouter.get("/", (req, res) => {
+  res.redirect("/pets")
+})
+
 rootRouter.use("/", clientRouter)
 
 export default rootRouter

@@ -1,4 +1,3 @@
-import { static } from "express";
 import query from "../functions/query.js";
 
 class Locations {

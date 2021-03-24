@@ -5,6 +5,8 @@ import Pet from "../../../models/Pet.js"
 const adoptionsRouter = new express.Router()
 
 // request to surrender an animal
+
+/*
 adoptionsRouter.post("/new", (req, res) => {
   try {
     const pet = new Pet(req.body)
@@ -16,7 +18,6 @@ adoptionsRouter.post("/new", (req, res) => {
   }
 })
 
-/*
 // request to adopt an animal
 adoptionsRouter.post("/adopt", (req, res) => {
   try {
