@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const AnimalSurrenderForm = (props) => {
-  const [addPetSurrenderedRecord, setPetSurrenderRecord] = useState({
+  const [petSurrenderedRecord, setPetSurrenderRecord] = useState({
     name: "",
     phoneNumber: "",
     email: "",
@@ -22,7 +22,7 @@ const AnimalSurrenderForm = (props) => {
         headers: new Headers({
           "Content-Type": "application/json",
         }),
-        body: JSON.stringify(addPetSurrenderedRecord)
+        body: JSON.stringify(petSurrenderedRecord)
       })
       if (!response.ok) {
         if (response.status === 422) {
@@ -54,7 +54,7 @@ const AnimalSurrenderForm = (props) => {
     }
 
     setPetSurrenderRecord({
-      ...addPetSurrenderedRecord,
+      ...petSurrenderedRecord,
       [event.currentTarget.name]: value
     })
   }
@@ -63,7 +63,7 @@ const AnimalSurrenderForm = (props) => {
     event.preventDefault()
     if({...petSurrenderedRecord} !== "") {
       setErrors("")
-      props.petSurrenderedRecord(addPetSurrenderedRecord)
+      props.petSurrenderedRecord(petSurrenderedRecord)
       setPetSurrenderRecord({
         ...petSurrenderedRecord
       })
