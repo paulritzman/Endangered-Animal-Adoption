@@ -1,8 +1,10 @@
 import React from "react"
+import { Link } from "react-router-dom"
 
 const TestComponent = (props) => {
+  const {id } = props.pet
   return (
-    <li>{props.petName}</li>
+    <li><Link to={`/pets/${id}`}>{props.pet.name}</Link></li>
   )
 }
 

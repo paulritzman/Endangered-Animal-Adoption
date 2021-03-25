@@ -14,7 +14,9 @@ const AdoptionShow = (props) => {
         throw(error)
       }
       const responseBody = await response.json()
-      setAdoption(responseBody.adoption)
+      
+      setAdoption(responseBody.pet)
+      // debugger
     } catch(error) {
       console.error(`Error in Fetch: ${error.message}`)
     }

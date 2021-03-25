@@ -31,7 +31,7 @@ const TestComponentList = (props) => {
     return (
       <TestComponent
         key={test.id}
-        petName={test.name}
+        pet={test}
       />
     )
   })

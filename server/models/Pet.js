@@ -18,7 +18,7 @@ class Pet {
     return petData.map((pet) => new this(pet));
   }
 
-  static async findById(id){
+  static async findById(id) {
     const queryData = { queryString: "SELECT * FROM adoptable_pets WHERE id = $1;", values: [id] };
     const petData = await query(queryData);
     return new this(petData[0]);
