@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Link, Redirect } from "react-router-dom"
 
-import ErrorList from "./ErrorList"
+//import ErrorList from "./ErrorList"
 
 const NewAdoptionForm = props => {
   const [newAdoption, setNewAdoption] = useState({
@@ -34,7 +34,6 @@ const NewAdoptionForm = props => {
         }
       } else {
         const body = await response.json()
-        console.log("Your request is in process.", body);
         setShouldRedirect(true)
       }
     } catch (error) {
@@ -63,7 +62,7 @@ const NewAdoptionForm = props => {
       <h1>Adopt Me!</h1>
       <h3><Link to="/adopt">Back to All Adoptable Animals</Link></h3>
 
-      <ErrorList errors={errors} />
+      {/* <ErrorList errors={errors} /> */}
       
       <form onSubmit={handleSubmit} className="callout">
         <label htmlFor="name">

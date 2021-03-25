@@ -28,7 +28,6 @@ const AdoptionShow = (props) => {
     <>
       <h3><Link to="/pets">Back to All Animals</Link></h3>
       <h1>Name: {adoption.name}</h1>
-
     </>
   )
 }
