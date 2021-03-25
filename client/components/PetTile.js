@@ -8,7 +8,7 @@ const PetTile = (props) => {
       <div>
         <h3>{name}</h3>
         <p>{description}</p>
-        <img src={imageUrl}></img>
+        <img src={imageUrl}/>
       </div>
       <Link to={`/pets/${id}`}><input className="button" type="submit" value={name}/> </Link>
     </div>
