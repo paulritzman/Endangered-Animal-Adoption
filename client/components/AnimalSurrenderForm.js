@@ -15,7 +15,7 @@ const AnimalSurrenderForm = (props) => {
   const [errors, setErrors] = useState ("")
   const [redirect, setRedirect] = useState(false);
 
-  const addSurrenderedPet = async () => {
+  const addPet = async () => {
     try {
       const response = await fetch("/api/v1/adoptions", {
         method: "POST",
@@ -70,20 +70,23 @@ const AnimalSurrenderForm = (props) => {
     } else if ({...petSurrenderedRecord} !== "") {
       setErrors("Field is blank. Please enter valid entry")
     }
-    addSurrenderedPet()
-  }
-
-  let errorMessage
-  if (errors) {
-    errorMessage = <h2>{errors}</h2>
+    addPet()
   }
 
   const clearForm = (event) => {
     event.preventDefault()
     setErrors("")
     setPetSurrenderRecord({
-      ...petSurrenderedRecord
+      name: "",
+      phoneNumber: "",
+      email: "",
+      petName: "",
+      petAge: "",
+      petType: "",
+      petImage: "",
+      vaccinationStatus: false
     })
+    setErrors({})
   }
 
   if (redirect) {
@@ -106,14 +109,14 @@ const AnimalSurrenderForm = (props) => {
 
     <label htmlFor="phoneNumber">Enter Your Phone Number:
       <input
-      type="tel"
-      id="phoneNumber" 
-      name="phoneNumber"
-      placeholder="206-000-0000"
-      pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-      onChange={handleChange}
-      value={petSurrenderedRecord.phoneNumber}
-      />
+        type="tel"
+        id="phoneNumber" 
+        name="phoneNumber"
+        placeholder="206-000-0000"
+        pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+        onChange={handleChange}
+        value={petSurrenderedRecord.phoneNumber}
+        />
       </label>
       <br />
 
@@ -181,11 +184,8 @@ const AnimalSurrenderForm = (props) => {
       </label>
       <br />
 
-      {errorMessage}
-
-      <input type="submit" value="Surrender My Pet"/>
+      <input className="button" type="submit" value="Surrender My Pet"/>
       <button className="button" onClick={clearForm}>Clear</button>
-
     </form>
   )
 
