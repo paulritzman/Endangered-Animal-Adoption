@@ -34,7 +34,6 @@ const NewAdoptionForm = props => {
         }
       } else {
         const body = await response.json()
-        console.log("Posted successfully!", body);
         setShouldRedirect(true)
       }
     } catch (error) {
