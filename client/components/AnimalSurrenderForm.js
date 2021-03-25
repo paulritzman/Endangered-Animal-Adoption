@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import ErrorList from "./ErrorList"
-
 import _ from 'lodash'
 
 const animalGroups = ["", "Mammal", "Reptile", "Bird", "Marsupial"]
@@ -39,7 +38,7 @@ const AnimalSurrenderForm = (props) => {
       })
       if (!response.ok) {
         if (response.status === 422) {
-          const body = await response.json();
+          const body = await response.json()
           return setErrors(body.errors)
         } else {
           const errorMessage = `${response.status} (${response.statusText})`
@@ -53,7 +52,7 @@ const AnimalSurrenderForm = (props) => {
     } catch (error) {
       console.error(`Error in fetch: ${error.message}`)
     }
-  };
+  }
 
   const handleChange = (event) => {
     const targetInput = event.currentTarget
@@ -139,7 +138,8 @@ const AnimalSurrenderForm = (props) => {
         pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
         onChange={handleChange}
         value={petSurrenderedRecord.phoneNumber}
-        />
+      />
+
       </label>
       <br />
 
