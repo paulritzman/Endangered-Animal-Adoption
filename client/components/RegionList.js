@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react"
 import fetchData from "../scripts/fetchData.js"
 
-
 const RegionList = (props) => {
   const [regions, setRegions] = useState([])
   const [selectedRegion, setSelectedRegion] = useState(null)
@@ -27,7 +26,7 @@ const RegionList = (props) => {
     }
 
     const handleClick = () => {
-      changeRegion(region.id)
+      changeRegions(region.id)
     }
 
     return (
@@ -42,9 +41,8 @@ const RegionList = (props) => {
 
   return (
     <div className="page">
-
       <div className="region-list">
-        <input className = "button" type = "submit" value = {regionListItems}/>
+        <input className="button" type="submit" value={regionListItems}/>
         </div>
     </div>
   )
