@@ -1,4 +1,7 @@
-import React, { useState } from "react";
+import React, { useState } from "react"
+import ErrorList from "./ErrorList"
+
+const animalGroups = ["", "Mammals", "Reptiles", "Birds", "Marsupial"]
 
 const AnimalSurrenderForm = (props) => {
   const [petSurrenderedRecord, setPetSurrenderRecord] = useState({
@@ -12,8 +15,16 @@ const AnimalSurrenderForm = (props) => {
     vaccinationStatus: false
   })
 
-  const [errors, setErrors] = useState ("")
+  const [errors, setErrors] = useState({})
   const [redirect, setRedirect] = useState(false);
+
+  const animalOptions = animalGroups.map(animal => {
+    return (
+      <option key={animal} value={animal}>
+        {animal}
+      </option>
+    )
+  })
 
   const addPet = async () => {
     try {
@@ -95,6 +106,7 @@ const AnimalSurrenderForm = (props) => {
 
   return (
     <form onSubmit={handleSubmit}>
+      <ErrorList errors={errors} />
       <h1>Surrender Pet</h1>
       <label htmlFor="name">Name:
       <input
@@ -154,11 +166,8 @@ const AnimalSurrenderForm = (props) => {
       <br />
 
       <label htmlFor="petType">Pet Type:</label>
-      <select id="petType" name="petType">
-        <option value="mammal">Mammal</option>
-        <option value="reptile">Reptile</option>
-        <option value="bird">Bird</option>
-        <option value="marsupial">Marsupial</option>
+      <select id="petType" name="petType" onChange={handleChange} value={petSurrenderedRecord.petType}>
+        {animalOptions}
       </select>
       <br />
         
