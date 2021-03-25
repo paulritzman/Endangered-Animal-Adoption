@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react"
-import { Link } from "react-router-dom"
-//this is complete
+
 const PetShow = (props) => {
   const [pet, setPet] = useState({})
 
   const getPet = async () => {
     try {
       const pet = props.match.params.id
-      const response = await fetch(`/api/v1/pet/${pet}`)
+      const response = await fetch(`/api/v1/pets/${pet}`)
       if (!response.ok) {
         const errorMessage = `${response.status} (${response.statusText})`
         const error = new Error(errorMessage)
@@ -26,7 +25,7 @@ const PetShow = (props) => {
 
   return (
     <>
-      <h1>{pet.imageUrl}</h1>
+      <img src={pet.imageUrl} />
       <h1>Name: {pet.name}</h1>
       <h1>Age: {pet.age}</h1>
       <h1>Vaccination Status: {pet.vaccinationStatus}</h1>
@@ -35,7 +34,6 @@ const PetShow = (props) => {
           <input className="button" type="submit" value="Adopt Me!" />
       </div>
     </>
-    
   )
 }
 
