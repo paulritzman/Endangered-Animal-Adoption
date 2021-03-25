@@ -1,4 +1,8 @@
 import React, { useState } from "react"
+import ErrorList from "./ErrorList"
+import _ from 'lodash'
+
+const animalGroups = ["", "Mammal", "Reptile", "Bird", "Marsupial"]
 
 const AnimalSurrenderForm = (props) => {
   const [petSurrenderedRecord, setPetSurrenderRecord] = useState({
@@ -12,10 +16,18 @@ const AnimalSurrenderForm = (props) => {
     vaccinationStatus: false
   })
 
-  const [errors, setErrors] = useState ("")
-  const [redirect, setRedirect] = useState(false)
+  const [errors, setErrors] = useState({})
+  const [redirect, setRedirect] = useState(false);
 
-  const addSurrenderedPet = async () => {
+  const animalOptions = animalGroups.map(animal => {
+    return (
+      <option key={animal} value={animal}>
+        {animal}
+      </option>
+    )
+  })
+
+  const addPet = async () => {
     try {
       const response = await fetch("/api/v1/adoptions", {
         method: "POST",
@@ -60,29 +72,42 @@ const AnimalSurrenderForm = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    if({...petSurrenderedRecord} !== "") {
-      setErrors("")
-      props.petSurrenderedRecord(petSurrenderedRecord)
-      setPetSurrenderRecord({
-        ...petSurrenderedRecord
-      })
-    } else if ({...petSurrenderedRecord} !== "") {
-      setErrors("Field is blank. Please enter valid entry")
+    if (validForSubmission()) {
+      props.addNewPet(petSurrenderedRecord)
     }
-    addSurrenderedPet()
+    addPet()
   }
 
-  let errorMessage
-  if (errors) {
-    errorMessage = <h2>{errors}</h2>
+  const validForSubmission = () => {
+    let submitErrors = {}
+    const requiredFields = ["name", "phoneNumber", "email", "petName", "petAge", "petType", "petImage"]
+    requiredFields.forEach(field => {
+      if (petSurrenderedRecord[field].trim() === "") {
+        submitErrors = {
+          ...submitErrors,
+          [field]: "is blank"
+        }
+      }
+    })
+  
+    setErrors(submitErrors)
+    return _.isEmpty(submitErrors)
   }
 
   const clearForm = (event) => {
     event.preventDefault()
     setErrors("")
     setPetSurrenderRecord({
-      ...petSurrenderedRecord
+      name: "",
+      phoneNumber: "",
+      email: "",
+      petName: "",
+      petAge: "",
+      petType: "",
+      petImage: "",
+      vaccinationStatus: false
     })
+    setErrors({})
   }
 
   if (redirect) {
@@ -91,6 +116,7 @@ const AnimalSurrenderForm = (props) => {
 
   return (
     <form onSubmit={handleSubmit}>
+      <ErrorList errors={errors} />
       <h1>Surrender Pet</h1>
       <label htmlFor="name">Name:
       <input
@@ -113,6 +139,7 @@ const AnimalSurrenderForm = (props) => {
         onChange={handleChange}
         value={petSurrenderedRecord.phoneNumber}
       />
+
       </label>
       <br />
 
@@ -150,11 +177,8 @@ const AnimalSurrenderForm = (props) => {
       <br />
 
       <label htmlFor="petType">Pet Type:</label>
-      <select id="petType" name="petType">
-        <option value="mammal">Mammal</option>
-        <option value="reptile">Reptile</option>
-        <option value="bird">Bird</option>
-        <option value="marsupial">Marsupial</option>
+      <select id="petType" name="petType" onChange={handleChange} value={petSurrenderedRecord.petType}>
+        {animalOptions}
       </select>
       <br />
         
@@ -180,11 +204,8 @@ const AnimalSurrenderForm = (props) => {
       </label>
       <br />
 
-      {errorMessage}
-
-      <input type="submit" value="Surrender My Pet"/>
+      <input className="button" type="submit" value="Surrender My Pet"/>
       <button className="button" onClick={clearForm}>Clear</button>
-
     </form>
   )
 
