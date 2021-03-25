@@ -1,14 +1,17 @@
 import React from 'react'
 import { Link } from "react-router-dom"
 
-const PetTile = ({ imageUrl, name, description }) => {
+const PetTile = (props) => {
+  const {id, name, description, imageUrl} = props.pet
   return (
     <div>
-      <h3> {name} </h3>
-      <p> {description} </p>
-      <p> {imageUrl} </p>
+      <div>
+        <h3>{name}</h3>
+        <p>{description}</p>
+        <img src={imageUrl}></img>
+      </div>
+      <Link to={`/pets/${id}`}><input className="button" type="submit" value={name}/> </Link>
     </div>
-    <Link to={`/pets/${id}`}> {name}} <input className="button" type="submit" value="More Info"/> </Link>
   )
 }
 
