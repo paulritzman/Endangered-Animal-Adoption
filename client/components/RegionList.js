@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import fetchData from "../scripts/fetchData.js"
+import fetchData from "../functions/fetchData.js"
 
 const RegionList = (props) => {
   const [regions, setRegions] = useState([])

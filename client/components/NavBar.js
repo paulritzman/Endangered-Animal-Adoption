@@ -1,7 +1,6 @@
 import React from "react"
 import { Switch, Route, Link } from "react-router-dom"
 import PetList from "./PetList"
-import PetShow from "./PetShow"
 import TypeList from "./TypeList"
 import RegionList from "./RegionList"
 import AnimalSurrenderForm from "./AnimalSurrenderForm"
@@ -35,7 +34,6 @@ const NavBar = () => {
       </div>
       <Switch>
         <Route exact path="/pets" component={PetList} />
-        <Route exact path="/pets/:id" component={PetShow} />
         <Route exact path="/types" component={TypeList} />
         <Route exact path="/regions" component={RegionList} />
         <Route exact path="/surrender" component={AnimalSurrenderForm} />
