@@ -4,33 +4,40 @@ import PetList from "./PetList"
 import PetShow from "./PetShow"
 import TypeList from "./TypeList"
 import RegionList from "./RegionList"
-import NewAdoptionForm from "./NewAdoptionForm"
 import AnimalSurrenderForm from "./AnimalSurrenderForm"
 
-const NavBar = props => {
+const NavBar = () => {
   return (
-    <div className="row column">
-      <div className="navbar">
-        <Link to="/pets">Home</Link>
-      </div>
-      <div className="navbar">
-        <Link to="/pets">Animal</Link>
-      </div>
-      <div className="navbar">
-        <Link to="/types">Types</Link>
-      </div>
-      <div className="navbar">
-        <Link to="/regions">Regions</Link>
-      </div>
-      <div className="navbar">
-        <Link to="/surrender">List Pet for Adoption</Link>
+    <div id="navbar-section">
+      <div className="container">
+        <div className="logo-wrapper">
+          <img src="/images/Logo.png" alt="Endangered Animal Adoptions" />
+        </div>
+        <div className="navbar-wrapper">
+          <nav id="navbar">
+            <Link to="/pets" className="link">
+              HOME
+            </Link>
+            <Link to="#" className="link">
+              OUR ANIMALS
+            </Link>
+            <Link to="/types" className="link">
+              TYPES
+            </Link>
+            <Link to="/regions" className="link">
+              REGIONS
+            </Link>
+          </nav>
+          <Link to="/surrender" className="btn">
+            List Pet for Adoption
+          </Link>
+        </div>
       </div>
       <Switch>
         <Route exact path="/pets" component={PetList} />
         <Route exact path="/pets/:id" component={PetShow} />
         <Route exact path="/types" component={TypeList} />
         <Route exact path="/regions" component={RegionList} />
-        <Route exact path="/adopt" component={NewAdoptionForm} />
         <Route exact path="/surrender" component={AnimalSurrenderForm} />
       </Switch>
     </div>

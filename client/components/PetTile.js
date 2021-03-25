@@ -2,8 +2,8 @@ import React from 'react'
 import { Link } from "react-router-dom"
 
 const PetTile = (props) => {
-  const { id, name, description, imageUrl } = props.pet
-
+  const {id, name, description, imageUrl} = props.pet
+  
   return (
     <div>
       <div>
