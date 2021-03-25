@@ -5,8 +5,8 @@ const PetShow = (props) => {
 
   const getPet = async () => {
     try {
-      const pet = props.match.params.id
-      const response = await fetch(`/api/v1/pets/${pet}`)
+      const petId = props.match.params.id
+      const response = await fetch(`/api/v1/pets/${petId}`)
       if (!response.ok) {
         const errorMessage = `${response.status} (${response.statusText})`
         const error = new Error(errorMessage)
