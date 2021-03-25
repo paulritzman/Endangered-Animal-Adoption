@@ -6,43 +6,17 @@ const petsRouter = new express.Router()
 petsRouter.get("/", async (req, res) => {
   try {
     const pets = await Pet.findAll()
-    res.status(200).json({ pets: pets })
-  }
-  catch (error) {
+    res.status(200).json({ pets })
+  } catch (error) {
     res.status(500).json({ errors: error })
   }
 })
 
-petsRouter.get("/:id", async (req, res) => {
+petsRouter.get("/:type", async (req, res) => {
   try {
-    const pet = await Pet.findById(req.params.id)
-    res.status(200).json({ pet: pet })
-  }
-  catch (error) {
-    let statusCode = 500
-    if (error.constructor.name === "TypeError") {
-      statusCode = 404
-    }
-    res.status(statusCode).json({ errors: error })
-  }
-})
-
-petsRouter.get("/types", async (req, res) => {
-  try {
-    const petType = await Pet.findAllTypes()
-    res.status(200).json({ petType: petType })
-  }
-  catch (error) {
-    res.status(500).json({ errors: error })
-  }
-})
-
-petsRouter.get("/:type/:id", async (req, res) => {
-  try {
-    const pet = await Pet.findTypeById(req.params.id)
-    res.status(200).json({ pet: pet })
-  }
-  catch (error) {
+    const pet = await Pet.findByType(req.params.type)
+    res.status(200).json({ pet })
+  } catch (error) {
     let statusCode = 500
     if (error.constructor.name === "TypeError") {
       statusCode = 404

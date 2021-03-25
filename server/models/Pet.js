@@ -1,7 +1,7 @@
 import query from "../functions/query.js";
 
 class Pet {
-  constructor({id, name, image_url, imageUrl, age, vaccination_status, vaccinationStatus, adoption_story, adoptionStory, adoption_status, adoptionStatus, pet_type_id, petTypeId}){
+  constructor({id, name, image_url, imageUrl, age, vaccination_status, vaccinationStatus, adoption_story, adoptionStory, adoption_status, adoptionStatus, pet_type_id, petTypeId}) {
     this.id = id
     this.name = name
     this.imageUrl = imageUrl || image_url
@@ -18,8 +18,23 @@ class Pet {
     return petData.map((pet) => new this(pet));
   }
 
-  static async findById(id){
+  static async findById(id) {
     const queryData = { queryString: "SELECT * FROM adoptable_pets WHERE id = $1;", values: [id] };
+    const petData = await query(queryData);
+    return new this(petData[0]);
+  }
+
+  static async findByType(type) {
+    const queryString =
+    `
+      SELECT *
+      FROM adoptable_pets.*
+        JOIN pet_types ON adoptable_pets.pet_type_id = pet_types.id
+        JOIN pet_groups ON pet_groups.pet_type_id = pet_types.id
+      WHERE pet_groups.group_title = $1
+      ;
+    `
+    const queryData = { queryString, values: [type] };
     const petData = await query(queryData);
     return new this(petData[0]);
   }
