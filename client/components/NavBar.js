@@ -1,9 +1,9 @@
 import React from "react"
 import { Switch, Route, Link } from "react-router-dom"
 import TestComponentList from "./TestComponentList"
-// import PetList from "./PetList"
+import PetList from "./PetList"
 // import AnimalIndexPage from "./AnimalIndexPage"
-import NewAdoptionForm from "./NewAdoptionForm"
+// import NewAdoptionForm from "./NewAdoptionForm"
 import AnimalSurrenderForm from "./AnimalSurrenderForm"
 
 const NavBar = props => {
@@ -16,7 +16,10 @@ const NavBar = props => {
         <Link to="/pets">Animal</Link>
       </div>
       <div className="navbar">
-        <Link to="/petType">Types</Link>
+        <Link to="/types">Types</Link>
+      </div>
+      <div className="navbar">
+        <Link to="/regions">Regions</Link>
       </div>
       <div className="navbar">
         <Link to="/surrender">List Pet for Adoption</Link>
@@ -26,7 +29,9 @@ const NavBar = props => {
       </div>
       <Switch>
         <Route exact path="/" component={TestComponentList} />
-        {/* <Route exact path="/pets" component={PetList} /> */}
+        <Route exact path="/pets" component={PetList} />
+        {/* <Route exact path="/types" component={TypeList} /> */}
+        {/* <Route exact path="/regions" component={RegionList} /> */}
         {/* <Route exact path="/pets/:id" component={AnimalIndexPage}> */}
         <Route exact path="/adoptions" component={NewAdoptionForm} />
         <Route exact path="/surrender" component={AnimalSurrenderForm} />
