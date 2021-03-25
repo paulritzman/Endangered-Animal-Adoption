@@ -1,15 +1,17 @@
 import React from "react"
 import { hot } from "react-hot-loader/root"
 import { Route, Switch, BrowserRouter } from "react-router-dom"
-import 'regenerator-runtime/runtime'
+import "regenerator-runtime/runtime"
 
 import NewAdoptionForm from "./NewAdoptionForm"
 import AnimalSurrenderForm from "./AnimalSurrenderForm"
+import NavBar from "./NavBar"
 
-const App = (props) => {
+const App = () => {
   return (
     <BrowserRouter>
       <Switch>
+        <Route exact path="/pets" component={NavBar} />
         <Route exact path="/adopt" component={NewAdoptionForm} />
         <Route exact path="/surrender" component={AnimalSurrenderForm} />
       </Switch>
