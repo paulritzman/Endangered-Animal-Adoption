@@ -34,7 +34,7 @@ const NewAdoptionForm = props => {
         }
       } else {
         const body = await response.json()
-        console.log("Posted successfully!", body);
+        console.log("Your request is in process.", body);
         setShouldRedirect(true)
       }
     } catch (error) {
@@ -83,6 +83,8 @@ const NewAdoptionForm = props => {
             id="phoneNumber"
             type="number"
             name="phoneNumber"
+            placeholder="206-000-0000"
+            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
             onChange={handleInputChange}
             value={newAdoption.phoneNumber}
           />
@@ -110,9 +112,12 @@ const NewAdoptionForm = props => {
           />
         </label>
         
-        <div className="button-group">
-          <input className="button" type="submit" value="Adopt Me!" />
-        </div>
+        <label htmlFor="homeStatus">Home Status:</label>
+        <select id="homeStatus" name="homeStatus">
+        <option value="rent">Rent</option>
+        <option value="own">Own</option>
+        </select>
+        
       </form>
     </>
   )
