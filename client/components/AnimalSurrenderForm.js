@@ -1,7 +1,9 @@
 import React, { useState } from "react"
 import ErrorList from "./ErrorList"
 
-const animalGroups = ["", "Mammals", "Reptiles", "Birds", "Marsupial"]
+import _ from 'lodash'
+
+const animalGroups = ["", "Mammal", "Reptile", "Bird", "Marsupial"]
 
 const AnimalSurrenderForm = (props) => {
   const [petSurrenderedRecord, setPetSurrenderRecord] = useState({
@@ -46,7 +48,6 @@ const AnimalSurrenderForm = (props) => {
         }
       } else {
         const body = await response.json()
-        console.log("Your request is in processs!", body)
         setRedirect(true)
       }
     } catch (error) {
@@ -72,16 +73,26 @@ const AnimalSurrenderForm = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    if({...petSurrenderedRecord} !== "") {
-      setErrors("")
-      props.petSurrenderedRecord(petSurrenderedRecord)
-      setPetSurrenderRecord({
-        ...petSurrenderedRecord
-      })
-    } else if ({...petSurrenderedRecord} !== "") {
-      setErrors("Field is blank. Please enter valid entry")
+    if (validForSubmission()) {
+      props.addNewPet(petSurrenderedRecord)
     }
     addPet()
+  }
+
+  const validForSubmission = () => {
+    let submitErrors = {}
+    const requiredFields = ["name", "phoneNumber", "email", "petName", "petAge", "petType", "petImage"]
+    requiredFields.forEach(field => {
+      if (petSurrenderedRecord[field].trim() === "") {
+        submitErrors = {
+          ...submitErrors,
+          [field]: "is blank"
+        }
+      }
+    })
+  
+    setErrors(submitErrors)
+    return _.isEmpty(submitErrors)
   }
 
   const clearForm = (event) => {
