@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from "react"
 
 const AnimalSurrenderForm = (props) => {
   const [petSurrenderedRecord, setPetSurrenderRecord] = useState({
@@ -13,7 +13,7 @@ const AnimalSurrenderForm = (props) => {
   })
 
   const [errors, setErrors] = useState ("")
-  const [redirect, setRedirect] = useState(false);
+  const [redirect, setRedirect] = useState(false)
 
   const addSurrenderedPet = async () => {
     try {
@@ -26,7 +26,7 @@ const AnimalSurrenderForm = (props) => {
       })
       if (!response.ok) {
         if (response.status === 422) {
-          const body = await response.json();
+          const body = await response.json()
           return setErrors(body.errors)
         } else {
           const errorMessage = `${response.status} (${response.statusText})`
@@ -35,13 +35,12 @@ const AnimalSurrenderForm = (props) => {
         }
       } else {
         const body = await response.json()
-        console.log("Your request is in processs!", body)
         setRedirect(true)
       }
     } catch (error) {
       console.error(`Error in fetch: ${error.message}`)
     }
-  };
+  }
 
   const handleChange = (event) => {
     const targetInput = event.currentTarget
@@ -106,13 +105,13 @@ const AnimalSurrenderForm = (props) => {
 
     <label htmlFor="phoneNumber">Enter Your Phone Number:
       <input
-      type="tel"
-      id="phoneNumber" 
-      name="phoneNumber"
-      placeholder="206-000-0000"
-      pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-      onChange={handleChange}
-      value={petSurrenderedRecord.phoneNumber}
+        type="tel"
+        id="phoneNumber" 
+        name="phoneNumber"
+        placeholder="206-000-0000"
+        pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+        onChange={handleChange}
+        value={petSurrenderedRecord.phoneNumber}
       />
       </label>
       <br />
