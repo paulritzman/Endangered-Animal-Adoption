@@ -17,7 +17,7 @@ const NavBar = () => {
             <Link to="/pets" className="link">
               HOME
             </Link>
-            <Link to="#" className="link">
+            <Link to="/pets" className="link">
               OUR ANIMALS
             </Link>
             <Link to="/types" className="link">
