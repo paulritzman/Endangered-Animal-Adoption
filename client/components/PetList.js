@@ -26,7 +26,8 @@ const PetList = props => {
   }, [])
 
   const petTiles = pets.map(pet => {
-    return <PetTile key={pet.id} pet={pet} animalGroup={"mammal"} />
+    console.log(pet)
+    return <PetTile key={pet.id} pet={pet} />
   })
 
   return (

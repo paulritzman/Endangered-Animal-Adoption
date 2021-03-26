@@ -13,18 +13,45 @@ class Pet {
   }
 
   static async findAll() {
-    const queryData = { queryString: "SELECT * FROM adoptable_pets;" };
+    const queryString =
+    `
+      SELECT adoptable_pets.*, pet_groups.group_title
+      FROM adoptable_pets
+        JOIN pet_types ON adoptable_pets.pet_type_id = pet_types.id
+        JOIN pet_groups ON pet_groups.pet_type_id = pet_types.id
+    ;
+    `
+
+    const queryData = { queryString }//{ queryString: "SELECT * FROM adoptable_pets;" };
     const petData = await query(queryData);
-    return petData.map((pet) => new this(pet));
+
+    const newPets = petData.map((pet) => {
+      const newPet = new this(pet)
+      const modifiedPet = {...newPet, animalGroup: pet.group_title}
+      return modifiedPet
+    })
+    return newPets;
   }
 
   static async findById(id) {
     console.log("Pet Model: findById()")
-
     console.log(id)
-    const queryData = { queryString: "SELECT * FROM adoptable_pets WHERE id = $1;", values: [id] };
+
+    const queryString =
+    `
+      SELECT adoptable_pets.*, pet_groups.group_title
+      FROM adoptable_pets
+        JOIN pet_types ON adoptable_pets.pet_type_id = pet_types.id
+        JOIN pet_groups ON pet_groups.pet_type_id = pet_types.id
+      WHERE adoptable_pets.id = $1
+    ;
+    `
+    //const queryData = { queryString: "SELECT * FROM adoptable_pets WHERE id = $1;", values: [id] };
+    const queryData = { queryString, values: [id] };
     const petData = await query(queryData);
-    return new this(petData[0]);
+    const newPet = new this(petData[0])
+    const modifiedPet = {...newPet, animalGroup: petData[0].group_title}
+    return modifiedPet;
   }
 
   static async findByType(type) {

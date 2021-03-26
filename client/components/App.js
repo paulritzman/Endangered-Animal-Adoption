@@ -13,7 +13,7 @@ const App = () => {
     <BrowserRouter>
       <Switch>
         <Route exact path="/pets" component={NavBar} />
-        <Route exact path="/pets/mammal/:id" component={PetShow} />
+        <Route exact path="/pets/:type/:id" component={PetShow} />
         <Route exact path="/adopt" component={NewAdoptionForm} />
         <Route exact path="/surrender" component={AnimalSurrenderForm} />
       </Switch>

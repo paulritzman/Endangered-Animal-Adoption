@@ -3,9 +3,9 @@ import { Link } from "react-router-dom"
 
 const PetTile = props => {
   console.log("In PetTile")
+  console.log(props.pet)
 
-  const { id, name, description, imageUrl } = props.pet
-  const { animalGroup } = props
+  const { id, name, description, imageUrl, animalGroup } = props.pet
 
   return (
     <>

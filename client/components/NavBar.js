@@ -18,14 +18,14 @@ const NavBar = () => {
             <Link to="/pets" className="link">
               HOME
             </Link>
+            <Link to="/pets/bird" className="link">
+              BIRDS
+            </Link>
             <Link to="/pets/mammal" className="link">
               MAMMALS
             </Link>
             <Link to="/pets/reptile" className="link">
               REPTILES
-            </Link>
-            <Link to="/pets/bird" className="link">
-              BIRDS
             </Link>
             <Link to="/pets/marsupial" className="link">
               MARSUPIALS
@@ -38,10 +38,7 @@ const NavBar = () => {
       </div>
       <Switch>
         <Route exact path="/pets" component={PetList} />
-        <Route exact path="/pets/mammal" component={TypeList} />
-        <Route exact path="/pets/reptile" component={TypeList} />
-        <Route exact path="/pets/bird" component={TypeList} />
-        <Route exact path="/pets/marsupial" component={TypeList} />
+        <Route exact path="/pets/:type" component={TypeList} />
         <Route exact path="/pets/:type/:id" component={PetShow} />
         <Route exact path="/surrender" component={AnimalSurrenderForm} />
       </Switch>

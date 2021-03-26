@@ -8,8 +8,9 @@ const PetShow = (props) => {
   const getPet = async () => {
     try {
       console.log("PetShow")
+      console.log("PetShow Props:", props.match.params.type)
       const petId = props.match.params.id
-      const animalGroup = props.match.params.animalGroup
+      const animalGroup = props.match.params.type
       console.log("PetShow:", petId)
       console.log("PetShow:", animalGroup)
       const response = await fetch(`/api/v1/pets/${animalGroup}/${petId}`)
