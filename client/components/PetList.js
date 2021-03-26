@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from "react"
 import PetTile from "./PetTile"
 
-const PetList = (props) => {
+const PetList = props => {
+  console.log("In PetList")
+
   const [pets, setPets] = useState([])
 
   const getPets = async () => {
@@ -10,11 +12,11 @@ const PetList = (props) => {
       if (!response.ok) {
         const errorMessage = `${response.status} (${response.statusText})`
         const error = new Error(errorMessage)
-        throw(error)
+        throw error
       }
       const responseBody = await response.json()
       setPets(responseBody.pets)
-    } catch(error) {
+    } catch (error) {
       console.error(`Error in Fetch: ${error.message}`)
     }
   }
@@ -23,21 +25,14 @@ const PetList = (props) => {
     getPets()
   }, [])
 
-  const petTiles = pets.map((pet) => {
-    return (
-      <PetTile
-        key={pet.id}
-        pet={pet}
-      />
-    )
+  const petTiles = pets.map(pet => {
+    return <PetTile key={pet.id} pet={pet} />
   })
 
   return (
     <div>
       <h1>My Pets List</h1>
-      <ul className="pets">
-        {petTiles}
-      </ul>
+      <ul className="pets">{petTiles}</ul>
     </div>
   )
 }

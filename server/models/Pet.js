@@ -1,7 +1,7 @@
 import query from "../functions/query.js";
 
 class Pet {
-  constructor({id, name, image_url, imageUrl, age, vaccination_status, vaccinationStatus, adoption_story, adoptionStory, adoption_status, adoptionStatus, pet_type_id, petTypeId}){
+  constructor({id, name, image_url, imageUrl, age, vaccination_status, vaccinationStatus, adoption_story, adoptionStory, adoption_status, adoptionStatus, pet_type_id, petTypeId}) {
     this.id = id
     this.name = name
     this.imageUrl = imageUrl || image_url
@@ -13,15 +13,62 @@ class Pet {
   }
 
   static async findAll() {
-    const queryData = { queryString: "SELECT * FROM adoptable_pets;" };
+    const queryString =
+    `
+      SELECT adoptable_pets.*, pet_groups.group_title
+      FROM adoptable_pets
+        JOIN pet_types ON adoptable_pets.pet_type_id = pet_types.id
+        JOIN pet_groups ON pet_groups.pet_type_id = pet_types.id
+    ;
+    `
+
+    const queryData = { queryString }//{ queryString: "SELECT * FROM adoptable_pets;" };
     const petData = await query(queryData);
-    return petData.map((pet) => new this(pet));
+
+    const newPets = petData.map((pet) => {
+      const newPet = new this(pet)
+      const modifiedPet = {...newPet, animalGroup: pet.group_title}
+      return modifiedPet
+    })
+    return newPets;
   }
 
-  static async findById(id){
-    const queryData = { queryString: "SELECT * FROM adoptable_pets WHERE id = $1;", values: [id] };
+  static async findById(id) {
+    console.log("Pet Model: findById()")
+    console.log(id)
+
+    const queryString =
+    `
+      SELECT adoptable_pets.*, pet_groups.group_title
+      FROM adoptable_pets
+        JOIN pet_types ON adoptable_pets.pet_type_id = pet_types.id
+        JOIN pet_groups ON pet_groups.pet_type_id = pet_types.id
+      WHERE adoptable_pets.id = $1
+    ;
+    `
+    //const queryData = { queryString: "SELECT * FROM adoptable_pets WHERE id = $1;", values: [id] };
+    const queryData = { queryString, values: [id] };
     const petData = await query(queryData);
-    return new this(petData[0]);
+    const newPet = new this(petData[0])
+    const modifiedPet = {...newPet, animalGroup: petData[0].group_title}
+    return modifiedPet;
+  }
+
+  static async findByType(type) {
+    console.log("Pet Model: findByType()")
+
+    const queryString =
+    `
+      SELECT adoptable_pets.*
+      FROM adoptable_pets
+        JOIN pet_types ON adoptable_pets.pet_type_id = pet_types.id
+        JOIN pet_groups ON pet_groups.pet_type_id = pet_types.id
+      WHERE pet_groups.group_title = $1
+      ;
+    `
+    const queryData = { queryString, values: [type] };
+    const petData = await query(queryData);
+    return petData.map((pet) => new this(pet));
   }
   
   // async savePet() {

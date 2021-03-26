@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react"
+import RegionTile from "./RegionTile"
 import fetchData from "../functions/fetchData.js"
 
-const RegionList = (props) => {
+const RegionList = props => {
   const [regions, setRegions] = useState([])
   const [selectedRegion, setSelectedRegion] = useState(null)
 
@@ -9,17 +10,17 @@ const RegionList = (props) => {
     fetchRegions
   }, [])
 
-  const fetchRegions = async (id) => {
-    const data = await fetchData("/api/v1/pets")
-    setRegions(id)
+  const fetchRegions = async () => {
+    const data = await fetchData("/api/v1/regions")
+    setRegions(data.regions)
   }
 
-  const changeRegions = (id) => {
+  const changeRegions = id => {
     const currentRegion = id === selectedRegion ? null : id
     setSelectedRegion(currentRegion)
   }
 
-  const regionListItems = regions.map((region) => {
+  const regionTiles = regions.map(region => {
     let selected
     if (selectedRegion === region.id) {
       selected = true
@@ -30,7 +31,7 @@ const RegionList = (props) => {
     }
 
     return (
-      <Question
+      <RegionTile
         key={region.id}
         region={region.region}
         selected={selected}
@@ -41,9 +42,7 @@ const RegionList = (props) => {
 
   return (
     <div className="page">
-      <div className="region-list">
-        <input className="button" type="submit" value={regionListItems}/>
-        </div>
+      <div className="region-list">{regionTiles}</div>
     </div>
   )
 }
