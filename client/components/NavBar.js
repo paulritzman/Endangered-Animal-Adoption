@@ -2,10 +2,11 @@ import React from "react"
 import { Switch, Route, Link } from "react-router-dom"
 import PetList from "./PetList"
 import TypeList from "./TypeList"
-import RegionList from "./RegionList"
 import AnimalSurrenderForm from "./AnimalSurrenderForm"
+import PetShow from "./PetShow"
 
 const NavBar = () => {
+  console.log("In NavBar")
   return (
     <div id="navbar-section">
       <div className="container">
@@ -17,14 +18,14 @@ const NavBar = () => {
             <Link to="/pets" className="link">
               HOME
             </Link>
+            <Link to="/pets/bird" className="link">
+              BIRDS
+            </Link>
             <Link to="/pets/mammal" className="link">
               MAMMALS
             </Link>
             <Link to="/pets/reptile" className="link">
               REPTILES
-            </Link>
-            <Link to="/pets/bird" className="link">
-              BIRDS
             </Link>
             <Link to="/pets/marsupial" className="link">
               MARSUPIALS
@@ -37,10 +38,8 @@ const NavBar = () => {
       </div>
       <Switch>
         <Route exact path="/pets" component={PetList} />
-        <Route exact path="/pets/mammal" component={TypeList} />
-        <Route exact path="/pets/reptile" component={TypeList} />
-        <Route exact path="/pets/bird" component={TypeList} />
-        <Route exact path="/pets/marsupial" component={TypeList} />
+        <Route exact path="/pets/:type" component={TypeList} />
+        <Route exact path="/pets/:type/:id" component={PetShow} />
         <Route exact path="/surrender" component={AnimalSurrenderForm} />
       </Switch>
     </div>

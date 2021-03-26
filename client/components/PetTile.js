@@ -2,7 +2,10 @@ import React from "react"
 import { Link } from "react-router-dom"
 
 const PetTile = props => {
-  const { id, name, description, imageUrl } = props.pet
+  console.log("In PetTile")
+  console.log(props.pet)
+
+  const { id, name, description, imageUrl, animalGroup } = props.pet
 
   return (
     <>
@@ -11,7 +14,7 @@ const PetTile = props => {
         <p>{description}</p>
         <img src={imageUrl} />
       </div>
-      <Link to={`/pets/${id}`}>
+      <Link to={`/pets/${animalGroup}/${id}`}>
         <input className="button" type="submit" value={name} />
       </Link>
     </>

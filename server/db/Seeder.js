@@ -48,9 +48,9 @@ class Seeder {
 
     const seedAdoptablePets = async () => {
       LineReader.eachLine(adoptablePets, async (line, last, done) => {
-        const [name, image_url, age, vaccination_status, adoption_story, adoption_status] = line.split(";")
-        const adoptablePetString = "INSERT INTO adoptable_pets (name, image_url, age, vaccination_status, adoption_story, adoption_status) VALUES ($1, $2, $3, $4, $5, $6);"
-        await query({ queryString: adoptablePetString, values: [name, image_url, age, vaccination_status, adoption_story, adoption_status] })
+        const [name, image_url, age, vaccination_status, adoption_story, adoption_status, pet_type_id] = line.split(";")
+        const adoptablePetString = "INSERT INTO adoptable_pets (name, image_url, age, vaccination_status, adoption_story, adoption_status, pet_type_id) VALUES ($1, $2, $3, $4, $5, $6, $7);"
+        await query({ queryString: adoptablePetString, values: [name, image_url, age, vaccination_status, adoption_story, adoption_status, pet_type_id] })
         done()
       })
     }

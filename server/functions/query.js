@@ -12,7 +12,7 @@ const query = async ({ queryString, values }) => {
     return result.rows
   } catch (error) {
     console.error(error)
-    pool.end()
+    client.release()
     throw error
   }
 }
