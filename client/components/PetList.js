@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import PetTile from "./PetTile"
+import FeaturedPet from "./FeaturedPet"
 
 const PetList = props => {
   console.log("In PetList")
@@ -25,15 +26,30 @@ const PetList = props => {
     getPets()
   }, [])
 
+  const featuredPet = pets.map(pet => {
+    if (pet.id === 1) {
+      return <FeaturedPet key={pet.id} pet={pet} />
+    }
+  })
+
+  console.log("Featured", featuredPet)
   const petTiles = pets.map(pet => {
-    return <PetTile key={pet.id} pet={pet} />
+    if (pet.id !== 1) {
+      return <PetTile key={pet.id} pet={pet} />
+    }
   })
 
   return (
-    <div>
-      <h1>My Pets List</h1>
-      <ul className="pets">{petTiles}</ul>
-    </div>
+    <>
+      <div id="hero-section"></div>
+      <div id="pet-list-section">
+        <div className="container">
+          <h1>Adoptable Animals</h1>
+          {featuredPet}
+          <ul className="pets">{petTiles}</ul>
+        </div>
+      </div>
+    </>
   )
 }
 

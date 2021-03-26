@@ -18,6 +18,11 @@ a {
   text-decoration: none;
 }
 
+h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
 .container {
   width: 100%;
   max-width: 1200px;
@@ -99,4 +104,94 @@ a {
   padding: 0.25rem 1rem;
   border-radius: 4px;
   background-color: #d55c19;
+}
+
+/*****************************************/
+
+#hero-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+#hero-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("./images/Hero-Image.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center top;
+  transform: scaleX(-1);
+}
+
+/***************************************/
+
+#pet-list-section {
+  width: 100%;
+}
+
+#pet-list-section .container {
+  flex-direction: column;
+}
+
+#pet-list-section .pets {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
+  gap: 2rem;
+  padding: 0 2rem 2rem;
+  margin-bottom: 2rem;
+}
+
+#pet-list-section .pets .card {
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#pet-list-section .card img {
+  width: 100%;
+  height: 200px;
+  display: block;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 5px 5px 0 0;
+}
+
+#pet-list-section .card-contents {
+  padding: 1.5rem;
+  text-align: center;
+}
+
+#pet-list-section .card-contents h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1.6rem;
+}
+
+#pet-list-section .card-contents p {
+  margin-bottom: 0.5rem;
+  color: #333;
+  text-transform: capitalize;
+}
+
+#pet-list-section .btn {
+  font-family: bebas-neue-by-fontfabric, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #fff;
+  padding: 0.25rem 2rem;
+  border-radius: 4px;
+  background-color: #58a9b3;
+  margin-bottom: 1rem;
 }
