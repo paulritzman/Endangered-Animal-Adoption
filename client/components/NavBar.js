@@ -4,12 +4,11 @@ import PetList from "./PetList"
 import TypeList from "./TypeList"
 import AnimalSurrenderForm from "./AnimalSurrenderForm"
 import NewAdoptionForm from "./NewAdoptionForm"
-
-
 import PetShow from "./PetShow"
 
 const NavBar = () => {
   console.log("In NavBar")
+  
   return (
     <div id="navbar-section">
       <div className="container">

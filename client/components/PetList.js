@@ -3,7 +3,7 @@ import PetTile from "./PetTile"
 
 const PetList = props => {
   console.log("In PetList")
-
+  
   const [pets, setPets] = useState([])
 
   const getPets = async () => {

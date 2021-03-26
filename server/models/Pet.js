@@ -18,13 +18,10 @@ class Pet {
       SELECT adoptable_pets.*, pet_groups.group_title
       FROM adoptable_pets
         JOIN pet_types ON adoptable_pets.pet_type_id = pet_types.id
-        JOIN pet_groups ON pet_groups.pet_type_id = pet_types.id
-    ;
+        JOIN pet_groups ON pet_groups.pet_type_id = pet_types.id;
     `
-
-    const queryData = { queryString }//{ queryString: "SELECT * FROM adoptable_pets;" };
+    const queryData = { queryString }
     const petData = await query(queryData);
-
     const newPets = petData.map((pet) => {
       const newPet = new this(pet)
       const modifiedPet = {...newPet, animalGroup: pet.group_title}
@@ -43,10 +40,8 @@ class Pet {
       FROM adoptable_pets
         JOIN pet_types ON adoptable_pets.pet_type_id = pet_types.id
         JOIN pet_groups ON pet_groups.pet_type_id = pet_types.id
-      WHERE adoptable_pets.id = $1
-    ;
+      WHERE adoptable_pets.id = $1;
     `
-    //const queryData = { queryString: "SELECT * FROM adoptable_pets WHERE id = $1;", values: [id] };
     const queryData = { queryString, values: [id] };
     const petData = await query(queryData);
     const newPet = new this(petData[0])
@@ -56,6 +51,7 @@ class Pet {
 
   static async findByType(type) {
     console.log("Pet Model: findByType()")
+    console.log(type)
 
     const queryString =
     `
@@ -63,8 +59,7 @@ class Pet {
       FROM adoptable_pets
         JOIN pet_types ON adoptable_pets.pet_type_id = pet_types.id
         JOIN pet_groups ON pet_groups.pet_type_id = pet_types.id
-      WHERE pet_groups.group_title = $1
-      ;
+      WHERE pet_groups.group_title = $1;
     `
     const queryData = { queryString, values: [type] };
     const petData = await query(queryData);
