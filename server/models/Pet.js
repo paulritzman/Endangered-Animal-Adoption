@@ -19,16 +19,21 @@ class Pet {
   }
 
   static async findById(id) {
+    console.log("Pet Model: findById()")
+
+    console.log(id)
     const queryData = { queryString: "SELECT * FROM adoptable_pets WHERE id = $1;", values: [id] };
     const petData = await query(queryData);
     return new this(petData[0]);
   }
 
   static async findByType(type) {
+    console.log("Pet Model: findByType()")
+
     const queryString =
     `
-      SELECT *
-      FROM adoptable_pets.*
+      SELECT adoptable_pets.*
+      FROM adoptable_pets
         JOIN pet_types ON adoptable_pets.pet_type_id = pet_types.id
         JOIN pet_groups ON pet_groups.pet_type_id = pet_types.id
       WHERE pet_groups.group_title = $1
@@ -36,7 +41,7 @@ class Pet {
     `
     const queryData = { queryString, values: [type] };
     const petData = await query(queryData);
-    return new this(petData[0]);
+    return petData.map((pet) => new this(pet));
   }
   
   // async savePet() {

@@ -8,11 +8,12 @@ import NewAdoptionForm from "./NewAdoptionForm"
 import AnimalSurrenderForm from "./AnimalSurrenderForm"
 
 const App = () => {
+  console.log("In App")
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/pets" component={NavBar} />
-        <Route exact path="/pets/:id" component={PetShow} />
+        <Route exact path="/pets/mammal/:id" component={PetShow} />
         <Route exact path="/adopt" component={NewAdoptionForm} />
         <Route exact path="/surrender" component={AnimalSurrenderForm} />
       </Switch>

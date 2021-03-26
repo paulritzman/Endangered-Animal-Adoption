@@ -1,26 +1,57 @@
 import React, { useState, useEffect } from "react"
 import fetchData from "../functions/fetchData.js"
+import PetTile from './PetTile'
 
-// show all types
 const TypeList = (props) => {
-  const [types, setTypes] = useState([])
-  const [selectedType, setSelectedType] = useState(null)
+  const [pets, setPets] = useState([])
+  const [selectedPets, setSelectedPets] = useState(null)
 
   useEffect(() => {
     fetchTypes
   }, [])
 
   const fetchTypes = async () => {
-    const data = await fetchData("/api/v1/pets/types")
-    setTypes(data.types)
+    const data = await fetchData(`/api/v1/pets/${type}`)
+    setPets(data.pets)
   }
 
-  const changeTypes = (id) => {
-    const currentType = id === selectedType ? null : id
-    setSelectedType(currentType)
-  }
+  // const changeTypes = (id) => {
+  //   const currentType = id === selectedPets ? null : id
+  //   setSelectedPets(currentType)
+  // }
 
-  const typeListItems = types.map((type) => {
+  const petListItems = pets.map((pet) => {
+    let selected
+    if (selectedPets === type.id) {
+      selected = true
+    }
+
+    //const handleClick = () => {
+    //  changeTypes(type.id)
+    //}
+
+    return (
+      <PetTile
+        key={pet.id}
+        pet={pet}
+      />
+    )
+  })
+
+  return (
+    <div className="page">
+      <div className="type-list">
+        <h1>Pets</h1>
+        {petTiles}
+      </div>
+    </div>
+  )
+}
+
+export default TypeList
+
+  /*
+  const typeListItems = pets.map((type) => {
     let selected
     if (selectedType === type.id) {
       selected = true
@@ -50,3 +81,4 @@ const TypeList = (props) => {
 }
 
 export default TypeList
+*/

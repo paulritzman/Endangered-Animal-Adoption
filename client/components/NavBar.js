@@ -5,6 +5,7 @@ import TypeList from "./TypeList"
 import AnimalSurrenderForm from "./AnimalSurrenderForm"
 
 const NavBar = () => {
+  console.log("In NavBar")
   return (
     <div id="navbar-section">
       <div className="container">

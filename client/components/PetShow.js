@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from "react"
 
 const PetShow = (props) => {
+  console.log("In PetShow")
+  
   const [pet, setPet] = useState({})
 
   const getPet = async () => {
     try {
+      console.log("PetShow")
       const petId = props.match.params.id
-      const response = await fetch(`/api/v1/pets/${petId}`)
+      const animalGroup = props.match.params.animalGroup
+      console.log("PetShow:", petId)
+      console.log("PetShow:", animalGroup)
+      const response = await fetch(`/api/v1/pets/${animalGroup}/${petId}`)
       if (!response.ok) {
         const errorMessage = `${response.status} (${response.statusText})`
         const error = new Error(errorMessage)

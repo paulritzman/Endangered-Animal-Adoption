@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import PetTile from "./PetTile"
 
 const PetList = (props) => {
+  console.log("In PetList")
+
   const [pets, setPets] = useState([])
 
   const getPets = async () => {
@@ -28,6 +30,7 @@ const PetList = (props) => {
       <PetTile
         key={pet.id}
         pet={pet}
+        animalGroup = "mammal"
       />
     )
   })
