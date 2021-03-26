@@ -39,9 +39,7 @@ const PetShow = (props) => {
       <h1>Vaccination Status: {pet.vaccinationStatus}</h1>
       <h1>Adoption Story: {pet.adoptionStory}</h1>
       <div className="button-group">
-      <Link to="/adopt" className="button">
-            Sponsor Me!
-          </Link>
+      <Link to="/adopt" className="button">Sponsor Me!</Link>
       </div>
     </>
   )
