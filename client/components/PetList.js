@@ -26,7 +26,6 @@ const PetList = props => {
   }, [])
 
   const petTiles = pets.map(pet => {
-    console.log(pet)
     return <PetTile key={pet.id} pet={pet} />
   })
 
