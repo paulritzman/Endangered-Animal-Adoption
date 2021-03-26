@@ -55,7 +55,7 @@ class Pet {
 
     const queryString =
     `
-      SELECT adoptable_pets.*
+      SELECT adoptable_pets.*, pet_groups.group_title
       FROM adoptable_pets
         JOIN pet_types ON adoptable_pets.pet_type_id = pet_types.id
         JOIN pet_groups ON pet_groups.pet_type_id = pet_types.id
@@ -63,7 +63,12 @@ class Pet {
     `
     const queryData = { queryString, values: [type] };
     const petData = await query(queryData);
-    return petData.map((pet) => new this(pet));
+    const newPets = petData.map((pet) => {
+      const newPet = new this(pet)
+      const modifiedPet = {...newPet, animalGroup: pet.group_title}
+      return modifiedPet
+    })
+    return newPets;
   }
   
   async savePet() {
