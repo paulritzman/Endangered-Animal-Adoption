@@ -13,7 +13,7 @@ const AnimalSurrenderForm = (props) => {
     petName: "",
     petAge: "",
     petType: "",
-    petImage: "",
+    petImageUrl: "",
     vaccinationStatus: false
   })
 
@@ -80,7 +80,7 @@ const AnimalSurrenderForm = (props) => {
 
   const validForSubmission = () => {
     let submitErrors = {}
-    const requiredFields = ["name", "phoneNumber", "email", "petName", "petAge", "petType", "petImage"]
+    const requiredFields = ["name", "phoneNumber", "email", "petName", "petAge", "petType", "petImageUrl"]
     requiredFields.forEach(field => {
       if (petSurrenderedRecord[field].trim() === "") {
         submitErrors = {
@@ -104,7 +104,7 @@ const AnimalSurrenderForm = (props) => {
       petName: "",
       petAge: "",
       petType: "",
-      petImage: "",
+      petImageUrl: "",
       vaccinationStatus: false
     })
     setErrors({})
@@ -182,13 +182,13 @@ const AnimalSurrenderForm = (props) => {
       </select>
       <br />
         
-      <label htmlFor="petImage">Pet Image URL:
+      <label htmlFor="petImageUrl">Pet Image URL:
       <input
-        id="petImage"
+        id="petImageUrl"
         type="text"
-        name="petImage"
+        name="petImageUrl"
         onChange={handleChange}
-        value={petSurrenderedRecord.petImage}
+        value={petSurrenderedRecord.petImageUrl}
         />
       </label>
       <br />
