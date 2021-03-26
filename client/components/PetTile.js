@@ -2,18 +2,25 @@ import React from "react"
 import { Link } from "react-router-dom"
 
 const PetTile = props => {
-  const { id, name, description, imageUrl, animalGroup } = props.pet
+  console.log("In PetTile")
+  console.log(props.pet)
+
+  const { id, name, age, vaccinationStatus, imageUrl, animalGroup } = props.pet
 
   return (
     <>
-      <div>
-        <h3>{name}</h3>
-        <p>{description}</p>
-        <img src={imageUrl} />
+      <div className="card box-shadow">
+        <img src={imageUrl} alt={name} />
+        <div className="card-contents">
+          <h3>{name}</h3>
+          <p>{animalGroup}</p>
+          <p>Age: {age}</p>
+          <p>Vaccinated: {vaccinationStatus ? "Yes" : "No"}</p>
+        </div>
+        <Link to={`/pets/${animalGroup}/${id}`} className="btn">
+          ADOPT ME
+        </Link>
       </div>
-      <Link to={`/pets/${animalGroup}/${id}`}>
-        <input className="button" type="submit" value={name} />
-      </Link>
     </>
   )
 }
