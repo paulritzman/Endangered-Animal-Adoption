@@ -32,16 +32,22 @@ const PetShow = (props) => {
   }, [])
 
   return (
-    <>
-      <img src={pet.imageUrl} />
-      <h1>Name: {pet.name}</h1>
-      <h1>Age: {pet.age}</h1>
-      <h1>Vaccination Status: {pet.vaccinationStatus}</h1>
-      <h1>Adoption Story: {pet.adoptionStory}</h1>
-      <div className="button-group">
-      <Link to="/adopt" className="button">Sponsor Me!</Link>
+    <div id="petShow-section">
+      <div className="show-container">
+        <div className="image-wrapper">
+          <img src={pet.imageUrl} />
+        </div>
+        <div className="pet-info-wrapper">
+          <h4>Name: {pet.name}</h4>
+          <p>Age: {pet.age}</p>
+          <p>Vaccination Status: {pet.vaccinationStatus}</p>
+          <p>Adoption Story: {pet.adoptionStory}</p>
+        </div>
+        <div className="button-group">
+          <Link to="/adopt" className="button">Sponsor Me!</Link>
+        </div>
       </div>
-    </>
+    </div>
   )
 }
 
