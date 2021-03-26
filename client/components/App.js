@@ -9,8 +9,6 @@ import NewAdoptionForm from "./NewAdoptionForm"
 import AnimalSurrenderForm from "./AnimalSurrenderForm"
 
 const App = () => {
-  console.log("In App")
-  
   return (
     <BrowserRouter>
       <Switch>

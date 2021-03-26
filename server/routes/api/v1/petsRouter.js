@@ -1,6 +1,5 @@
 import express from "express"
 import Pet from "../../../models/Pet.js"
-import Type from "../../../models/Type.js"
 import Surrender from "../../../models/Surrender.js"
 
 const petsRouter = new express.Router()
