@@ -71,15 +71,14 @@ class Pet {
     return petData.map((pet) => new this(pet));
   }
   
-  // async savePet() {
-  //   const insertString =
-  //    "INSERT INTO adoptable_pets (name, image_url, age, vaccination_status, adoption_story, adoption_status,pet_type_id ) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id;";
-  //   const insertValues = [this.name, this.imageUrl, this.vaccinationStatus, this.adoptionStory, this.adoptionStatus, this.petTypeId];
-
-  //   const queryData = { queryString: insertString, values: insertValues };
-  //   const result = await query(queryData);
-  //   this.id = result[0].id;
-  // }
+  async savePet() {
+    const insertString =
+     "INSERT INTO adoptable_pets (name, image_url, age, vaccination_status) VALUES ($1, $2, $3, $4) RETURNING id;";
+    const insertValues = [this.name, this.imageUrl, this.vaccinationStatus];
+    const queryData = { queryString: insertString, values: insertValues };
+    const result = await query(queryData);
+    this.id = result[0].id;
+  }
 }
 
 export default Pet

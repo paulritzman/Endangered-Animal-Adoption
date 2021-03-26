@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import ErrorList from "./ErrorList"
 import _ from 'lodash'
+import {Redirect} from "react-router-dom"
 
 const animalGroups = ["", "Mammal", "Reptile", "Bird", "Marsupial"]
 
@@ -29,7 +30,7 @@ const AnimalSurrenderForm = (props) => {
 
   const addPet = async () => {
     try {
-      const response = await fetch("/api/v1/adoptions", {
+      const response = await fetch("/api/v1/pets", {
         method: "POST",
         headers: new Headers({
           "Content-Type": "application/json",
@@ -73,9 +74,8 @@ const AnimalSurrenderForm = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault()
     if (validForSubmission()) {
-      props.addNewPet(petSurrenderedRecord)
+      addPet(petSurrenderedRecord)
     }
-    addPet()
   }
 
   const validForSubmission = () => {
@@ -111,11 +111,11 @@ const AnimalSurrenderForm = (props) => {
   }
 
   if (redirect) {
-    return <Redirect to="/adoption/new" />
+    return <Redirect to="/pets" />
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className ="form">
       <ErrorList errors={errors} />
       <h1>Surrender Pet</h1>
       <label htmlFor="name">Name:
