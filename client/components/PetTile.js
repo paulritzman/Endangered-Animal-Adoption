@@ -5,7 +5,8 @@ const PetTile = props => {
   console.log("In PetTile")
 
   const { id, name, description, imageUrl } = props.pet
-  const { animalGroup } = props.animalGroup
+  const { animalGroup } = props
+
   return (
     <>
       <div>

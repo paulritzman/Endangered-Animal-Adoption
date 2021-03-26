@@ -58,6 +58,6 @@ ALTER TABLE pet_surrender_applications DROP CONSTRAINT pet_surrender_application
 ALTER TABLE adoptable_pets DROP CONSTRAINT adoptable_pets_pet_type_id_fkey;
 ALTER TABLE adoption_applications DROP CONSTRAINT adoption_applications_pet_id_fkey;
 
-SELECT * From adoptable_pets;
-JOIN pet_types ON pet_types.id = adoptable_pets.pet_type_id;
+SELECT * From adoptable_pets
+JOIN pet_types ON pet_types.id = adoptable_pets.pet_type_id where pet_types.type = 'Amur Leopard';
 -- JOIN pet_groups ON pet_groups.pet_type_id = pet_types.id;

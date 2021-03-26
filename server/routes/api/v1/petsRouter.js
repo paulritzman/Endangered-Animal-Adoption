@@ -1,5 +1,5 @@
 import express from "express"
-import Pet from '../../../models/Pet.js'
+import Pet from "../../../models/Pet.js"
 
 const petsRouter = new express.Router()
 
@@ -12,7 +12,12 @@ petsRouter.get("/", async (req, res) => {
   }
 })
 
-petsRouter.get("/mammal/:id", async (req, res) => {
+petsRouter.get("/:type", async (req, res) => {
+  const animalType = req.params.type
+  console.log(animalType)
+})
+
+petsRouter.get("/:type/:id", async (req, res) => {
   console.log("petsRouter... /:id")
 
   try {
