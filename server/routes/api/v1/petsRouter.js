@@ -77,12 +77,11 @@ petsRouter.post("/", async (req, res) => {
     const newSurrenderphone = new Surrender(newSurrenderPhone)
     newSurrenderphone.saveSurrender()
     res.json({ newSurrenderphone })
-    
+
     const newSurrenderEmail = req.body.email
     const newSurrenderemail = new Surrender(newSurrenderEmail)
     newSurrenderemail.saveSurrender()
     res.json({ newSurrenderemail })
-  
   } catch (error) {
     console.log(error)
     res.json({ errors: error })
