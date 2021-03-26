@@ -2,9 +2,6 @@ import React from "react"
 import { Link } from "react-router-dom"
 
 const PetTile = props => {
-  console.log("In PetTile")
-  console.log(props.pet)
-
   const { id, name, age, vaccinationStatus, imageUrl, animalGroup } = props.pet
 
   return (
