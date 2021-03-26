@@ -7,8 +7,6 @@ import NewAdoptionForm from "./NewAdoptionForm"
 import PetShow from "./PetShow"
 
 const NavBar = () => {
-  console.log("In NavBar")
-  
   return (
     <>
       <div id="navbar-section">
