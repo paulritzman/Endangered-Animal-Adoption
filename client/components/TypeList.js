@@ -1,84 +1,43 @@
 import React, { useState, useEffect } from "react"
-import fetchData from "../functions/fetchData.js"
-import PetTile from './PetTile'
+import PetTile from "./PetTile"
 
-const TypeList = (props) => {
+const TypeList = props => {
+  console.log("In TypeList")
+
   const [pets, setPets] = useState([])
-  const [selectedPets, setSelectedPets] = useState(null)
 
-  useEffect(() => {
-    fetchTypes
-  }, [])
-
-  const fetchTypes = async () => {
-    const data = await fetchData(`/api/v1/pets/${type}`)
-    setPets(data.pets)
+  const getPets = async () => {
+    try {
+      console.log("TypeList Props:", props.match.params.type)
+      const animalGroup = props.match.params.type
+      console.log("AnimalGroup:", animalGroup)
+      const response = await fetch(`/api/v1/pets/${animalGroup}`)
+      if (!response.ok) {
+        const errorMessage = `${response.status} (${response.statusText})`
+        const error = new Error(errorMessage)
+        throw error
+      }
+      const responseBody = await response.json()
+      setPets(responseBody.pets)
+    } catch (error) {
+      console.error(`Error in Fetch: ${error.message}`)
+    }
   }
 
-  // const changeTypes = (id) => {
-  //   const currentType = id === selectedPets ? null : id
-  //   setSelectedPets(currentType)
-  // }
+  useEffect(() => {
+    getPets()
+  }, [])
 
-  const petListItems = pets.map((pet) => {
-    let selected
-    if (selectedPets === type.id) {
-      selected = true
-    }
-
-    //const handleClick = () => {
-    //  changeTypes(type.id)
-    //}
-
-    return (
-      <PetTile
-        key={pet.id}
-        pet={pet}
-      />
-    )
+  const petTiles = pets.map(pet => {
+    return <PetTile key={pet.id} pet={pet} />
   })
 
   return (
-    <div className="page">
-      <div className="type-list">
-        <h1>Pets</h1>
-        {petTiles}
-      </div>
+    <div>
+      <h1>{props.match.params.type}</h1>
+      <ul className="pets">{petTiles}</ul>
     </div>
   )
 }
 
 export default TypeList
-
-  /*
-  const typeListItems = pets.map((type) => {
-    let selected
-    if (selectedType === type.id) {
-      selected = true
-    }
-
-    const handleClick = () => {
-      changeTypes(type.id)
-    }
-
-    return (
-      <TypeTile
-        key={type.id}
-        groupTitle={type.group_title}
-        selected={selected}
-        handleClick={handleClick}
-      />
-    )
-  })
-
-  return (
-    <div className="page">
-      <div className="type-list">
-        <input className="button" type="submit" value={typeListItems}/>
-        </div>
-    </div>
-  )
-}
-
-export default TypeList
-*/

@@ -4,7 +4,7 @@ import FeaturedPet from "./FeaturedPet"
 
 const PetList = props => {
   console.log("In PetList")
-
+  
   const [pets, setPets] = useState([])
 
   const getPets = async () => {

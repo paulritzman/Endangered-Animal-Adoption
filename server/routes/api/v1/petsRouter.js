@@ -15,8 +15,19 @@ petsRouter.get("/", async (req, res) => {
 })
 
 petsRouter.get("/:type", async (req, res) => {
-  const animalType = req.params.type
-  console.log(animalType)
+  console.log("petsRouter... /:type")
+  console.log(req.params.type)
+
+  try {
+    const pets = await Pet.findByType(req.params.type)
+    res.status(200).json({ pets })
+  } catch (error) {
+    let statusCode = 500
+    if (error.constructor.name === "TypeError") {
+      statusCode = 404
+    }
+    res.status(statusCode).json({ errors: error })
+  }
 })
 
 petsRouter.get("/:type/:id", async (req, res) => {
