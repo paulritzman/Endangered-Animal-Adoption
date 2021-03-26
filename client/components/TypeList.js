@@ -2,15 +2,11 @@ import React, { useState, useEffect } from "react"
 import PetTile from "./PetTile"
 
 const TypeList = props => {
-  console.log("In TypeList")
-
   const [pets, setPets] = useState([])
 
   const getPets = async () => {
     try {
-      console.log("TypeList Props:", props.match.params.type)
       const animalGroup = props.match.params.type
-      console.log("AnimalGroup:", animalGroup)
       const response = await fetch(`/api/v1/pets/${animalGroup}`)
       if (!response.ok) {
         const errorMessage = `${response.status} (${response.statusText})`

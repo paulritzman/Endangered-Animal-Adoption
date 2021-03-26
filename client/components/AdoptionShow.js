@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
-//may not need
+
 const AdoptionShow = (props) => {
   const [adoption, setAdoption] = useState({})
 

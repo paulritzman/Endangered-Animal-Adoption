@@ -3,8 +3,6 @@ import PetTile from "./PetTile"
 import FeaturedPet from "./FeaturedPet"
 
 const PetList = props => {
-  console.log("In PetList")
-
   const [pets, setPets] = useState([])
 
   const getPets = async () => {
@@ -32,7 +30,6 @@ const PetList = props => {
     }
   })
 
-  console.log("Featured", featuredPet)
   const petTiles = pets.map(pet => {
     if (pet.id !== 1) {
       return <PetTile key={pet.id} pet={pet} />
