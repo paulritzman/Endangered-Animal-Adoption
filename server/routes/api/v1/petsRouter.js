@@ -1,5 +1,7 @@
 import express from "express"
+import NewAdoptionForm from "../../../../client/components/NewAdoptionForm.js"
 import Pet from "../../../models/Pet.js"
+import Adopt from "../../../models/Adopt.js"
 
 const petsRouter = new express.Router()
 
@@ -29,6 +31,17 @@ petsRouter.get("/:type/:id", async (req, res) => {
       statusCode = 404
     }
     res.status(statusCode).json({ errors: error })
+  }
+})
+
+petsRouter.post("/", async (req, res) => {
+  try {
+    const formData = req.body
+    const newAdopt = new Adopt(formData)
+    newAdopt.save()
+    res.status(200).json({ pets })
+  } catch (error) {
+    res.status(500).json({ errors: error })
   }
 })
 

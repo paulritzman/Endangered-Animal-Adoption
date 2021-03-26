@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import { Link, Redirect } from "react-router-dom"
-
-//import ErrorList from "./ErrorList"
+import ErrorList from "./ErrorList"
 
 const NewAdoptionForm = props => {
   const [newAdoption, setNewAdoption] = useState({
@@ -99,24 +98,13 @@ const NewAdoptionForm = props => {
             value={newAdoption.email}
           />
         </label>
-
-        <label htmlFor="homeStatus">
-          Home Status:
-          <input
-            id="homeStatus"
-            type="text"
-            name="homeStatus"
-            onChange={handleInputChange}
-            value={newAdoption.homeStatus}
-          />
-        </label>
         
         <label htmlFor="homeStatus">Home Status:</label>
         <select id="homeStatus" name="homeStatus">
         <option value="rent">Rent</option>
         <option value="own">Own</option>
         </select>
-        
+        <input className="button" type="submit" value="Adopt"/>
       </form>
     </>
   )

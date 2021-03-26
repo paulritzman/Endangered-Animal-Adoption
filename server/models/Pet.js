@@ -80,6 +80,8 @@ class Pet {
   //   const result = await query(queryData);
   //   this.id = result[0].id;
   // }
+
+
 }
 
 export default Pet

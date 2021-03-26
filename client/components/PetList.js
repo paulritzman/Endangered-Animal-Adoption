@@ -36,5 +36,4 @@ const PetList = props => {
     </div>
   )
 }
-
 export default PetList
