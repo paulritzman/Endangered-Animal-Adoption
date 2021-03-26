@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react"
+import FeaturedPet from "./FeaturedPet"
 import PetTile from "./PetTile"
 
 const PetList = props => {
   console.log("In PetList")
 
   const [pets, setPets] = useState([])
+  const [featuredPets, setFeatured] = useState([])
 
   const getPets = async () => {
     try {
@@ -29,10 +31,15 @@ const PetList = props => {
     return <PetTile key={pet.id} pet={pet} />
   })
 
+  const petFeatured = featuredPets.map(featured => {
+    return <FeaturedPet key={featured.id} pet={featured} />
+  })
+
   return (
     <div>
       <h1>My Pets List</h1>
       <ul className="pets">{petTiles}</ul>
+      <ul className="featured-pets">{petFeatured}</ul>
     </div>
   )
 }
