@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import {Link} from "react-router-dom"
 
 const PetShow = (props) => {
   console.log("In PetShow")
@@ -38,7 +39,9 @@ const PetShow = (props) => {
       <h1>Vaccination Status: {pet.vaccinationStatus}</h1>
       <h1>Adoption Story: {pet.adoptionStory}</h1>
       <div className="button-group">
-          <input className="button" type="submit" value="Adopt Me!" />
+      <Link to="/adopt" className="button">
+            Sponsor Me!
+          </Link>
       </div>
     </>
   )

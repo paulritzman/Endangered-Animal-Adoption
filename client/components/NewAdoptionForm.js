@@ -60,7 +60,7 @@ const NewAdoptionForm = props => {
   return (
     <>
       <h1>Adopt Me!</h1>
-      <h3><Link to="/adopt">Back to All Adoptable Animals</Link></h3>
+      <h3><Link to="/pets">Back to All Adoptable Animals</Link></h3>
 
       {/* <ErrorList errors={errors} /> */}
       
