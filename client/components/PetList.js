@@ -4,7 +4,7 @@ import FeaturedPet from "./FeaturedPet"
 
 const PetList = props => {
   console.log("In PetList")
-  
+
   const [pets, setPets] = useState([])
 
   const getPets = async () => {
@@ -42,10 +42,11 @@ const PetList = props => {
   return (
     <>
       <div id="hero-section"></div>
+      <h1>Featured Animal</h1>
+      {featuredPet}
       <div id="pet-list-section">
         <div className="container">
           <h1>Adoptable Animals</h1>
-          {featuredPet}
           <ul className="pets">{petTiles}</ul>
         </div>
       </div>

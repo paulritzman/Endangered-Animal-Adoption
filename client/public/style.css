@@ -18,9 +18,16 @@ a {
   text-decoration: none;
 }
 
-h1 {
+h1,
+h2 {
+  margin: 0;
+  padding: 0;
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
+}
+
+h1 span {
+  text-transform: capitalize;
 }
 
 .container {
@@ -144,26 +151,25 @@ h1 {
 #pet-list-section .pets {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
-  gap: 2rem;
-  padding: 0 2rem 2rem;
+  column-gap: 2rem;
+  row-gap: 2rem;
   margin-bottom: 2rem;
 }
 
 #pet-list-section .pets .card {
-  border-radius: 5px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  max-width: 400px;
 }
 
 #pet-list-section .card img {
   width: 100%;
-  height: 200px;
+  height: 250px;
   display: block;
   object-fit: cover;
   object-position: top;
-  border-radius: 5px 5px 0 0;
 }
 
 #pet-list-section .card-contents {
@@ -194,4 +200,107 @@ h1 {
   border-radius: 4px;
   background-color: #58a9b3;
   margin-bottom: 1rem;
+}
+
+/*************************************/
+
+#featured-pet {
+  margin-bottom: 2rem;
+}
+
+#featured-pet .img-wrapper {
+  width: 50%;
+  margin-right: 2rem;
+}
+
+#featured-pet img {
+  width: 100%;
+  height: 375px;
+  display: block;
+  object-fit: cover;
+  object-position: top;
+}
+
+#featured-pet .section-content {
+  width: 50%;
+  padding: 1rem 2rem;
+}
+
+#featured-pet .section-content h3 {
+  font-family: bebas-neue-by-fontfabric, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 3rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+#featured-pet .section-content p {
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+#featured-pet .btn {
+  font-family: bebas-neue-by-fontfabric, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #fff;
+  padding: 0.25rem 2rem;
+  border-radius: 4px;
+  background-color: #58a9b3;
+  margin-top: 2rem;
+}
+.animal-group {
+  text-transform: capitalize;
+}
+
+/***************************************/
+
+#pet-show .img-wrapper {
+  width: 800px;
+  margin-top: 3rem;
+}
+
+#pet-show .img-wrapper img {
+  width: 100%;
+  height: 375px;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+}
+
+#pet-show .section-content {
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#pet-show .btn {
+  font-family: bebas-neue-by-fontfabric, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #fff;
+  padding: 0.25rem 2rem;
+  border-radius: 4px;
+  background-color: #58a9b3;
+  margin-top: 2rem;
+}
+
+#pet-show h1 {
+  margin-bottom: 0.5rem;
+}
+
+#pet-show p {
+  margin-bottom: 0.5rem;
+  max-width: 60ch;
 }

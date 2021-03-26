@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
 
-const PetShow = (props) => {
+const PetShow = props => {
   const [pet, setPet] = useState({})
 
   const getPet = async () => {
@@ -12,11 +12,11 @@ const PetShow = (props) => {
       if (!response.ok) {
         const errorMessage = `${response.status} (${response.statusText})`
         const error = new Error(errorMessage)
-        throw(error)
+        throw error
       }
       const responseBody = await response.json()
       setPet(responseBody.pet)
-    } catch(error) {
+    } catch (error) {
       console.error(`Error in Fetch: ${error.message}`)
     }
   }
@@ -26,18 +26,29 @@ const PetShow = (props) => {
   }, [])
 
   return (
-    <>
-      <img src={pet.imageUrl} />
-      <h1>Name: {pet.name}</h1>
-      <h1>Age: {pet.age}</h1>
-      <h1>Vaccination Status: {pet.vaccinationStatus}</h1>
-      <h1>Adoption Story: {pet.adoptionStory}</h1>
-      <div className="button-group">
-      <Link to="/adopt" className="button">
-            Sponsor Me!
-          </Link>
+    <div id="pet-show" className="container box-shadow">
+      <div className="img-wrapper">
+        <img src={pet.imageUrl} />
       </div>
-    </>
+      <div className="section-content">
+        <h1>{pet.name}</h1>
+        <p>
+          <strong>Age: </strong>
+          {pet.age}
+        </p>
+        <p>
+          <strong>Vaccination Status: </strong>
+          {pet.vaccinationStatus ? "Yes" : "No"}
+        </p>
+        <p>
+          <strong>Adoption Story: </strong>
+          {pet.adoptionStory}
+        </p>
+        <Link to="/adopt" className="btn">
+          Sponsor Me!
+        </Link>
+      </div>
+    </div>
   )
 }
 

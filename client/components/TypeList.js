@@ -33,10 +33,17 @@ const TypeList = props => {
   })
 
   return (
-    <div>
-      <h1>{props.match.params.type}</h1>
-      <ul className="pets">{petTiles}</ul>
-    </div>
+    <>
+      <div id="hero-section"></div>
+      <div id="pet-list-section">
+        <div className="container">
+          <h1>
+            Adoptable <span>{props.match.params.type}s</span>
+          </h1>
+          <ul className="pets">{petTiles}</ul>
+        </div>
+      </div>
+    </>
   )
 }
 
